@@ -60,27 +60,9 @@ public class dataTransController {
         return "/index";
     }
 
-    @RequestMapping(value="testLoad")
-    public String testLoad(Model mode)
-    {
-       return "/test";
+    @RequestMapping(value = "testLoad")
+    public String testLoad(Model mode) {
+        return "/test";
     }
-   // public static String bean2Json(Object bean, SerializerFeature[] features) {
-//        if(null == bean) {
-//            throw new IllegalArgumentException("target bean is null!");
-//        } else {
-//            try {
-//                String ex = null;
-//                if(null == features) {
-//                  //  ex = JSON.toJSONString(bean);
-//                } else {
-//                  //  ex = JSON.toJSONString(bean, features);
-//                }
-//
-//                return ex;
-//            } catch (Exception var3) {
-//              //  throw new JSONException("Met error in converting bean to json!Error:" + var3.getMessage(), var3);
-//            }
-//        }
-   // }
+
 }

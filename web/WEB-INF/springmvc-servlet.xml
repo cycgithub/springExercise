@@ -17,9 +17,15 @@
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value=""></property>
-        <property name="suffix" value=".html"></property>
+        <property name="suffix" value=".jsp"></property>
     </bean>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.dataTrans.AuthManager"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
     <!--<bean name="hello1" class="springmvc01.HelloController">
     </bean>-->
 </beans>
