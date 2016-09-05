@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -16,6 +17,8 @@ public class dataTransController {
 
     @RequestMapping(value = "transDirect.htm")
     public String dataTransDirect(Model mode, String data) {
+        Initial init=new Initial();
+        //init.setAmount(new BigDecimal(1.234));
         return "/index";
     }
 
