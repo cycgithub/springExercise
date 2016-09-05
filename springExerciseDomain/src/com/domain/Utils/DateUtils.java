@@ -8,6 +8,12 @@ import java.util.*;
  */
 public class DateUtils {
 
+     /*
+     gc.add(1,-1)表示年份减一.
+     gc.add(2,-1)表示月份减一.
+     gc.add(3.-1)表示周减一.
+     gc.add(5,-1)表示天减一.
+     */
     public String getDate(String date) {
         System.out.println(date);
         Calendar ca = Calendar.getInstance();
@@ -21,11 +27,6 @@ public class DateUtils {
             gc.setTime(da);
         } catch (Exception e) {
         }
-       /* *gc.add(1,-1)表示年份减一.
-                *gc.add(2,-1)表示月份减一.
-                *gc.add(3.-1)表示周减一.
-                *gc.add(5,-1)表示天减一.*/
-        //gc.setTime(da);
         String str = endDate.substring(8);
         String strPre = endDate.substring(0, 8);
         if (str.compareTo("00") > 0 && str.compareTo("10") <= 0) {
