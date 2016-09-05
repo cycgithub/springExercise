@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by chenyuchao on 2016/8/19.
+ * 权限管理
  */
 public class AuthManager implements HandlerInterceptor{
     @Override

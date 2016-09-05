@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="resources/js/jquery/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <script src="resources/js/jquery/jquery.js" charset="UTF-8"></script>
+    <script src="resources/js/jquery/jquery-ui.js" charset="UTF-8"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="dataTrans/transDirect.htm" method="get">
+    <input  id="data" name="data" type="text"/>
+    <input type="submit" value="提交"/>
+</form>
+<input type="button" id="testAjax" value="AjaxTest"/>
+<input type="button" id="testLoad" value="testLoad"/>
+<div id="load-div"></div>
+<script>
+    $(document).ready(function () {
+        $("#testAjax").click(function () {
+            alert("发送请求");
+        });
+        $("#data").datepicker();
+        $("#testLoad").click(function () {
+
+            $("#load-div").load("dataTrans/testLoad.htm", function () {
+                $("#load-div").dialog();
+            });
+        });
+    })
+    function abc() {
+        alert("abc");
+    };
+
+</script>
+<script src="resources/pathTest.js" type="text/javascript"/>
+</body>
+</html>

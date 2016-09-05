@@ -1,23 +1,15 @@
-package com.dataTrans;
-
-import org.springframework.ui.Model;
-import org.springframework.stereotype.Controller;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+package com.domain.Utils;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * Created by chenyuchao on 2016/7/19.
+ * Created by chenyuchao on 2016/9/5.
  */
-@Controller
-@RequestMapping("dataTrans")
-public class dataTransController {
+public class DateUtils {
 
-    @RequestMapping(value = "transDirect.htm")
-    public String dataTransDirect(Model mode, String data) {
-        System.out.println(data);
+    public String getDate(String date) {
+        System.out.println(date);
         Calendar ca = Calendar.getInstance();
         String endDate = "2016-06-31";
         GregorianCalendar gc = new GregorianCalendar();
@@ -57,12 +49,13 @@ public class dataTransController {
         }
         for (String yy : stringList)
             System.out.println(yy);
+        String kkkk = "YSB";
+        if (kkkk.contains("-")) kkkk = kkkk.substring(0, kkkk.indexOf('-'));
+        Map<String, Set<String>> setMap = new HashMap<String, Set<String>>();
+        Set<String> setList = new HashSet<String>();
+        setList.add("abc");
+        setMap.put("cyc", setList);
         return "/index";
-    }
 
-    @RequestMapping(value = "testLoad")
-    public String testLoad(Model mode) {
-        return "/test";
     }
-
 }
