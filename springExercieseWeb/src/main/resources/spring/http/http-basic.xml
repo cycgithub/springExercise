@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-http="http://www.springframework.org/schema/integration/http"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/integration
+    http://www.springframework.org/schema/integration/spring-integration.xsd
+    http://www.springframework.org/schema/integration/http
+    http://www.springframework.org/schema/integration/http/spring-integration-http.xsd">
+
+    <!--http server begin-->
+    <bean id="jackson2HttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+
+    <int-http:inbound-gateway
+            request-channel="httpRequestChannel"
+            reply-channel="httpReplyChannel"
+            error-channel="httpErrorChannel"
+            path="/01005/receive/request"
+            request-payload-type="com.domain.http.HttpRequest"
+            message-converters="jackson2HttpMessageConverter"
+            merge-with-default-converters="false"
+            supported-methods="POST">
+        <int-http:header name="productCode" expression="#pathVariables.productCode"/>
+        <int-http:header name="business" expression="#pathVariables.business"/>
+        <int-http:header name="process" expression="#pathVariables.process"/>
+    </int-http:inbound-gateway>
+
+    <int:channel id="httpRequestChannel"/>
+    <int:channel id="httpRouterChannel"/>
+    <int:channel id="httpResponseChannel"/>
+    <int:channel id="httpReplyChannel"/>
+    <int:channel id="httpErrorChannel"/>
+
+    <int:chain input-channel="httpRequestChannel" output-channel="httpRouterChannel">
+        <!--<int:transformer>-->
+            <!--<bean class="com.jd.athena.gateway.service.core.PathTransformer"/>-->
+        <!--</int:transformer>-->
+        <!--<int:service-activator>-->
+            <!--<bean class="com.jd.athena.gateway.service.core.UriValidate"/>-->
+        <!--</int:service-activator>-->
+        <!--<int:service-activator method="decryptByPri">-->
+            <!--<bean class="com.jd.athena.gateway.service.core.TokenDecrypt"/>-->
+        <!--</int:service-activator>-->
+    </int:chain>
+    <int:router input-channel="httpRouterChannel" expression="payload.productCode + 'ServerChannel'"/>
+    <int:chain input-channel="httpErrorChannel" output-channel="httpResponseChannel">
+        <!--<int:service-activator>-->
+            <!--<bean class="com.jd.athena.gateway.service.core.ErrorHandler"/>-->
+        <!--</int:service-activator>-->
+    </int:chain>
+    <int:chain input-channel="httpResponseChannel" output-channel="httpReplyChannel">
+        <int:object-to-json-transformer/>
+        <!--<int:service-activator method="encryptByPri">-->
+            <!--<bean class="com.jd.athena.gateway.service.core.TokenEncrypt"/>-->
+        <!--</int:service-activator>-->
+    </int:chain>
+    <!--http server end-->
+
+    <!--http client begin-->
+    <!--http client end-->
+</beans>

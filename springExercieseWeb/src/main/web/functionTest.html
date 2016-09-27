@@ -1,31 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="resources/js/jquery/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
-    <script src="resources/js/jquery/jquery.js" charset="UTF-8"></script>
-    <script src="resources/js/jquery/jquery-ui.js" charset="UTF-8"></script>
+    <link href="/resources/jquery/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <script src="/resources/jquery/jquery.js" charset="UTF-8"></script>
+    <script src="/resources/jquery/jquery-ui.js" charset="UTF-8"></script>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        input{
+            width:100px;
+        }
+    </style>
 </head>
 <body>
 <form action="dataTrans/transDirect.htm" method="get">
-    <input  id="data" name="data" type="text"/>
+    <input style="width:200px" id="data" name="data" type="text"/>
     <input type="submit" value="提交"/>
 </form>
 <input type="button" id="testAjax" value="AjaxTest"/>
 <input type="button" id="testLoad" value="testLoad"/>
+<input type="button" id="testPost" value="testPost"/>
+<!--<input type="button" id="testAjax" value="testPost"/>-->
 <div id="load-div"></div>
 <script>
     $(document).ready(function () {
-        $("#testAjax").click(function () {
-            alert("发送请求");
-        });
+//        $("#testAjax").click(function () {
+//            alert("发送请求");
+//        });
         $("#data").datepicker();
         $("#testLoad").click(function () {
 
             $("#load-div").load("dataTrans/testLoad.htm", function () {
                 $("#load-div").dialog();
             });
+        });
+        $("#testPost").click(function(){
+//           $.post("dataTrans/testPost",);
+        });
+        $("#testAjax").click(function(){
+            alert("发送请求");
+           $.ajax({
+               url: "dataTrans/test.htm",
+               type:"POST",
+               data:{jj:"bac"},
+               success:function(data){
+                   alert(data.name);
+                   alert("调用成功");
+               }
+        });
+
         });
     })
     function abc() {

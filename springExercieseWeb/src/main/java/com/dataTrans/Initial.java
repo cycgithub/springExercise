@@ -6,9 +6,9 @@ import java.math.BigDecimal;
  * Created by chenyuchao on 2016/8/2.
  */
 public class Initial {
-    private String name = "cyc";
+    private String name = "cyc123";
     private Integer age = 20;
-    private BigDecimal amount=new BigDecimal(0.00);
+    private BigDecimal amount = new BigDecimal(0.00);
 
     public String getName() {
         return name;

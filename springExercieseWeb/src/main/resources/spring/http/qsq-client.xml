@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-http="http://www.springframework.org/schema/integration/http"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/integration
+    http://www.springframework.org/schema/integration/spring-integration.xsd
+    http://www.springframework.org/schema/integration/http
+    http://www.springframework.org/schema/integration/http/spring-integration-http.xsd">
+
+    <bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
+        <property name="writeAcceptCharset" value="false"/>
+    </bean>
+    <!--<bean id="responseErrorChannel1" class="com.jd.athena.gateway.service.core.ResponseErrorChannel"/>-->
+    <int-http:outbound-gateway id="qsqOutGateway"
+                               request-channel="httpOutRequestChannel"
+                               url="http://localhost:8070/01005/receive/request"
+                               http-method="POST"
+                               mapped-request-headers="Content-Type,Accept,Accept-Charset"
+                               extract-request-payload="true"
+                               expected-response-type="java.lang.String"
+                               charset="UTF-8" message-converters="stringHttpMessageConverter"
+                               reply-timeout="1000"
+                               reply-channel="httpOutResponseChannel">
+        <int-http:uri-variable name="transCode" expression="headers.transCode"/>
+    </int-http:outbound-gateway>
+    <int:channel id="qsqClientChannel"/>
+    <int:channel id="httpOutRequestChannel"/>
+    <int:channel id="httpOutResponseChannel"/>
+
+    <int:chain input-channel="qsqClientChannel" output-channel="httpOutRequestChannel">
+        <!--<int:transformer>-->
+            <!--<bean class="com.jd.athena.gateway.service.core.ClientWrapperTransformer"/>-->
+        <!--</int:transformer>-->
+        <!--<int:service-activator method="encryptByPub">-->
+            <!--<bean class="com.jd.athena.gateway.service.core.TokenEncrypt"/>-->
+        <!--</int:service-activator>-->
+        <int:object-to-json-transformer/>
+    </int:chain>
+    <int:chain input-channel="httpOutResponseChannel1">
+        <int:json-to-object-transformer type="com.domain.http.HttpRequest"/>
+        <!--<int:service-activator method="decryptByPub">-->
+            <!--<bean class="com.jd.athena.gateway.service.core.TokenDecrypt"/>-->
+        <!--</int:service-activator>-->
+    </int:chain>
+</beans>
