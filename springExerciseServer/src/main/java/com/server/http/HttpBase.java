@@ -15,5 +15,5 @@ public interface HttpBase<T>{
      * @param object
      * @return
      */
-    HttpResponse accept(T object);
+    HttpResponse acceptRequest(T object);
 }

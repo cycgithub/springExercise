@@ -15,7 +15,7 @@ public class BaseTest {
     
 //	protected Logger log = Logger.getLogger(this.getClass());
     protected static ApplicationContext appContext;
-    protected static String[] string = new String[]{"springmvc-servlet.xml"};
+    protected static String[] string = new String[]{"spring/spring-config.xml"};
 
     @BeforeClass
     public static void setUp() throws Exception {

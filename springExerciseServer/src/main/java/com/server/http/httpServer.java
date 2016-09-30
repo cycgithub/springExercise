@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
  * Created by chenyuchao on 2016/9/24.
  */
 @Service("httpServer")
-public class HttpServer implements HttpBase<String>{
+public class HttpServer implements HttpBase<Object>{
 
     @Override
-    public HttpResponse accept(String request){
+    public HttpResponse acceptRequest(Object request){
 
         System.out.println("接收到的信息："+request);
         HttpResponse response = new HttpResponse();

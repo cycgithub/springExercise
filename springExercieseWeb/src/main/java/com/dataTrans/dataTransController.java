@@ -2,12 +2,12 @@ package com.dataTrans;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.client.BasicInterface;
 import com.server.http.HttpBase;
-import com.test.ServiceTest;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +29,8 @@ public class dataTransController {
     @Autowired
     private ApplicationContext applicationContext;
 
-    @Autowired
-    private ServiceTest impleService;
+//    @Autowired
+//    private ServiceTest versionService;
 //    @Autowired
 //    private BasicInterface httpClient;
     @RequestMapping(value = "transDirect.htm")
@@ -56,9 +56,12 @@ public class dataTransController {
     @RequestMapping(value="test.htm", method=RequestMethod.POST)
     @ResponseBody
     public Object testAjax(Model mode, HttpServletRequest request){
-        String kk=impleService.play("cyc");
+        AbstractApplicationContext ctx=new ClassPathXmlApplicationContext("spring/spring-config.xml");
+        String []nameskk=ctx.getBeanDefinitionNames();
+        String []names=applicationContext.getBeanDefinitionNames();
         HttpBase httpClient=(HttpBase) applicationContext.getBean("httpServer");
-       // httpClient.doBusiness("sdfasd");
+
+//        httpClient.doBusiness("sdfasd");
         Initial init = new Initial();
         InputStream is=null;
         String contentStr="";

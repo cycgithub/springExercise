@@ -8,14 +8,15 @@
     http://www.springframework.org/schema/integration/spring-integration.xsd">
 
     <int:channel id="01005ServerChannel"/>
-    <int:router input-channel="01005ServerChannel" expression="payload.productCode + T(org.apache.commons.lang3.StringUtils).capitalize(payload.business) + T(org.apache.commons.lang3.StringUtils).capitalize(payload.process) + 'ServerChannel'"/>
+    <!--<int:router input-channel="01005ServerChannel" expression="payload.productCode + T(org.apache.commons.lang3.StringUtils).capitalize(payload.business) + T(org.apache.commons.lang3.StringUtils).capitalize(payload.process) + 'ServerChannel'"/>-->
 
+    <int:router input-channel="01005ServerChannel" expression="'01005'+'ReceiveRequestServerChannel'"/>
     <!--接收审核数据-->
     <int:channel id="01005ReceiveRequestServerChannel"/>
-    <int:chain input-channel="01005ReceiveRequestServerChannel" output-channel="01005ReceiveRequestChannel">
-        <int:transformer expression="payload.dataJson"/>
-        <int:json-to-object-transformer type="com.jd.athena.gateway.domain.qsq.QsqMaterial"/>
-    </int:chain>
-    <int:service-activator input-channel="01005ReceiveRequestChannel" output-channel="httpResponseChannel" ref="receiveRequestServer">
+    <!--<int:chain input-channel="01005ReceiveRequestServerChannel" output-channel="01005ReceiveRequestChannel">-->
+        <!--<int:transformer expression="payload.dataJson"/>-->
+        <!--&lt;!&ndash;<int:json-to-object-transformer type="com.jd.athena.gateway.domain.qsq.QsqMaterial"/>&ndash;&gt;-->
+    <!--</int:chain>-->
+    <int:service-activator input-channel="httpRouterChannel" output-channel="httpResponseChannel" ref="httpServer">
     </int:service-activator>
 </beans>
