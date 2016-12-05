@@ -68,6 +68,7 @@ public class dataTransController {
         String []nameskk=ctx.getBeanDefinitionNames();
         String []names=applicationContext.getBeanDefinitionNames();
         HttpBase httpClient=(HttpBase) applicationContext.getBean("httpServer");
+        String ttt="ttt";
 
 //        httpClient.doBusiness("sdfasd");
         Initial init = new Initial();
