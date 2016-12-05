@@ -46,6 +46,7 @@ public class dataTransController {
         System.out.println(tt[1].getCode());
         String path=applicationContext.getClassLoader().getResource("/").toString();
         String test="abc";
+        System.out.println(test);
         ModelAndView mav=new ModelAndView("/index");
         return mav;
     }
