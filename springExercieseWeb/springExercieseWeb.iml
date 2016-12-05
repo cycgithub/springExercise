@@ -8,11 +8,9 @@
         </descriptors>
         <webroots>
           <root url="file://$MODULE_DIR$/src/main/web" relative="/" />
-          <root url="file://$MODULE_DIR$/src/main/resources" relative="WEB-INF/config" />
         </webroots>
         <sourceRoots>
           <root url="file://$MODULE_DIR$/src/main/java" />
-          <root url="file://$MODULE_DIR$/src/main/resources" />
         </sourceRoots>
       </configuration>
     </facet>

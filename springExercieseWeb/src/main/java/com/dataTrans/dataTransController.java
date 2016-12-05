@@ -2,6 +2,7 @@ package com.dataTrans;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.domain.Utils.BusinessTypeEnum;
 import com.server.http.HttpBase;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * Created by chenyuchao on 2016/7/19.
@@ -39,7 +41,11 @@ public class dataTransController {
         JSONObject jsonObject=(JSONObject) JSON.toJSON(init);
        //init.setAmount(new BigDecimal(1.234));
 //        return "index";
-        ModelAndView mav=new ModelAndView("/index.html");
+        BusinessTypeEnum [] tt=BusinessTypeEnum.values();
+        System.out.println(tt[1].getDescription());
+        System.out.println(tt[1].getCode());
+        String path=applicationContext.getClassLoader().getResource("/").toString();
+        ModelAndView mav=new ModelAndView("/index");
         return mav;
     }
 
